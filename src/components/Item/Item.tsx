@@ -1,6 +1,7 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { CheckBox, DeleteButton } from "../Base";
+import { StyleSheet, View } from "react-native";
+import { colors } from "../../utils/constants";
+import { CheckBox, DeleteButton, Typography } from "../Base";
 
 interface ItemProps {
   title: string;
@@ -16,7 +17,7 @@ export const Item: React.FC<ItemProps> = (props) => {
     <View style={styles.component}>
       <CheckBox check={check} onCheck={onCheck} />
       <View style={styles.contentTextComponent}>
-        <Text style={styles.textComponent}>{title}</Text>
+        <Typography style={styles.textComponent}>{title}</Typography>
       </View>
       <DeleteButton
         onPress={onDelete}
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
   component: {
     flexDirection: "row",
     marginBottom: 16,
-    backgroundColor: "#212121",
+    backgroundColor: colors.colorPrimary,
     borderRadius: 10,
     padding: 16,
   },
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   textComponent: {
-    color: "#ffffff",
+    color: colors.colorTextLight,
   },
   contentCheckboxComponent: {
     flex: 0.2,

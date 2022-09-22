@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
+import { StyleSheet, TouchableHighlight, View } from "react-native";
+import { Typography } from "./Typography";
 
 interface CheckBoxProps {
   check?: boolean;
@@ -22,7 +23,9 @@ export const CheckBox: React.FC<CheckBoxProps> = (props) => {
       onPress={handleOnCheck}
     >
       <View style={styles.component}>
-        {check ? <Text style={styles.textComponent}>☑️</Text> : null}
+        {check ? (
+          <Typography style={styles.textComponent}>☑️</Typography>
+        ) : null}
       </View>
     </TouchableHighlight>
   );

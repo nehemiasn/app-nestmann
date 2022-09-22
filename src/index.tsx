@@ -1,3 +1,4 @@
+import { useFonts } from "expo-font";
 import React from "react";
 import {
   Button,
@@ -7,9 +8,10 @@ import {
   StyleSheet,
   FlatList,
   TextInput,
-  Text,
 } from "react-native";
+import { Typography } from "./components/Base";
 import { Item } from "./components/Item/Item";
+import { colors } from "./utils/constants";
 
 export interface IItem {
   id: number;
@@ -18,6 +20,13 @@ export interface IItem {
 }
 
 export const App: React.FC = () => {
+  const [loaded] = useFonts({
+    "OpenSans-Regular": require("../assets/fonts/OpenSans/OpenSans-Regular.ttf"),
+    "OpenSans-Light": require("../assets/fonts/OpenSans/OpenSans-Light.ttf"),
+    "OpenSans-Bold": require("../assets/fonts/OpenSans/OpenSans-Bold.ttf"),
+    "OpenSans-SemiBold": require("../assets/fonts/OpenSans/OpenSans-SemiBold.ttf"),
+    "OpenSans-ExtraBold": require("../assets/fonts/OpenSans/OpenSans-ExtraBold.ttf"),
+  });
   const [list, setList] = React.useState<IItem[]>([]);
   const [text, setText] = React.useState<string>("");
 
@@ -37,6 +46,10 @@ export const App: React.FC = () => {
     setText(() => "");
   };
 
+  if (!loaded) {
+    return <></>;
+  }
+
   return (
     <SafeAreaView
       style={{
@@ -46,18 +59,22 @@ export const App: React.FC = () => {
       <StatusBar />
       <View style={styles.container}>
         <View style={styles.contentTitleContainer}>
-          <Text style={styles.title}>Notas</Text>
+          <Typography style={styles.title}>Notas</Typography>
         </View>
         <View style={styles.container1}>
           <TextInput
             placeholder="Agregar una nota"
             style={styles.inputContainer1}
-            selectionColor="#e2e2e2"
-            placeholderTextColor="#212121"
+            selectionColor={colors.colorSelection}
+            placeholderTextColor={colors.colorPrimary}
             onChangeText={onHandleChangeText}
             value={text}
           />
-          <Button title="Add" color="#212121" onPress={onHandleAdd} />
+          <Button
+            title="Add"
+            color={colors.colorPrimary}
+            onPress={onHandleAdd}
+          />
         </View>
         <View style={styles.container2}>
           <FlatList
@@ -91,11 +108,23 @@ export const App: React.FC = () => {
 const styles = StyleSheet.create({
   container: {},
   contentTitleContainer: {
+    backgroundColor: "black",
+    margin: 16,
     padding: 16,
+    shadowColor: "red",
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.44,
+    shadowRadius: 10.32,
+    elevation: 16,
+    borderRadius: 20,
   },
   title: {
     fontSize: 20,
     textAlign: "center",
+    color: colors.colorTextLight,
   },
   container1: {
     flexDirection: "row",
@@ -104,10 +133,10 @@ const styles = StyleSheet.create({
   },
   inputContainer1: {
     width: "80%",
-    borderBottomColor: "#212121",
+    borderBottomColor: colors.colorPrimary,
     borderBottomWidth: 1,
     height: 40,
-    color: "#212121",
+    color: colors.colorPrimary,
   },
   container2: {
     padding: 16,

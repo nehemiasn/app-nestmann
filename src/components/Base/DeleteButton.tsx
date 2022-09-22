@@ -3,10 +3,11 @@ import {
   Button,
   Modal,
   StyleSheet,
-  Text,
   TouchableHighlight,
   View,
 } from "react-native";
+import { colors } from "../../utils/constants";
+import { Typography } from "./Typography";
 
 interface DeleteButtonProps {
   onPress?: () => void;
@@ -49,7 +50,7 @@ export const DeleteButton: React.FC<DeleteButtonProps> = (props) => {
         onPress={handleOnPress}
       >
         <View style={styles.component}>
-          <Text style={styles.textComponent}>❌</Text>
+          <Typography style={styles.textComponent}>❌</Typography>
         </View>
       </TouchableHighlight>
       {modal ? (
@@ -61,10 +62,12 @@ export const DeleteButton: React.FC<DeleteButtonProps> = (props) => {
           <View style={styles.modal}>
             <View style={styles.textModal}>
               <View>
-                <Text style={styles.titleModal}>{modal.title || "Alerta"}</Text>
+                <Typography style={styles.titleModal}>
+                  {modal.title || "Alerta"}
+                </Typography>
               </View>
               <View style={styles.messageModal}>
-                <Text>{modal.message}</Text>
+                <Typography>{modal.message}</Typography>
               </View>
             </View>
             <View style={styles.buttonsModal}>
@@ -73,7 +76,7 @@ export const DeleteButton: React.FC<DeleteButtonProps> = (props) => {
                   <Button
                     title={modal.textCancel || "Cancelar"}
                     onPress={handleOnCancel}
-                    color="#212121"
+                    color={colors.colorPrimary}
                   />
                 ) : null}
               </View>
@@ -81,7 +84,7 @@ export const DeleteButton: React.FC<DeleteButtonProps> = (props) => {
                 <Button
                   title={modal.textOk || "Aceptar"}
                   onPress={handleOnPress}
-                  color="#212121"
+                  color={colors.colorPrimary}
                 />
               </View>
             </View>
